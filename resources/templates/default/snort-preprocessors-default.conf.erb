@@ -1,0 +1,100 @@
+<%####################################################################### %>
+<%# Copyright (c) 2014 ENEO Tecnología S.L. %>
+<%# This file is part of redBorder. %>
+<%# redBorder is free software: you can redistribute it and/or modify %>
+<%# it under the terms of the GNU Affero General Public License License as published by %>
+<%# the Free Software Foundation, either version 3 of the License, or %>
+<%# (at your option) any later version. %>
+<%# redBorder is distributed in the hope that it will be useful, %>
+<%# but WITHOUT ANY WARRANTY; without even the implied warranty of %>
+<%# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the %>
+<%# GNU Affero General Public License License for more details. %>
+<%# You should have received a copy of the GNU Affero General Public License License %>
+<%# along with redBorder. If not, see <http://www.gnu.org/licenses/>. %>
+<%####################################################################### %>
+###################################################
+# Default Preprocessor configuration 
+###################################################
+
+preprocessor frag3_global: max_frags 65536, memcap 71303168
+preprocessor frag3_engine: policy windows detect_anomalies overlap_limit 10 min_fragment_length 100 timeout 180
+preprocessor stream5_global: track_tcp yes, \
+   track_udp yes, \
+   track_icmp no, \ 
+   max_tcp 1048576, \
+   max_udp 1048576, \
+   memcap 1073741824
+preprocessor stream5_tcp: policy windows, detect_anomalies, require_3whs 180, \
+   overlap_limit 10, small_segments 3 bytes 150, timeout 180, \
+    ports client 21 22 23 25 42 53 79 109 110 111 113 119 135 136 137 139 143 \
+        161 445 513 514 587 593 691 1433 1521 2100 3306 6070 6665 6666 6667 6668 6669 \
+        7000 8181 32770 32771 32772 32773 32774 32775 32776 32777 32778 32779, \
+    ports both 80 81 311 443 465 563 591 593 636 901 989 992 993 994 995 1220 1414 1830 2301 2381 2809 3128 3702 5250 7907 7001 7802 7777 7779 \
+        7801 7900 7901 7902 7903 7904 7905 7906 7908 7909 7910 7911 7912 7913 7914 7915 7916 \
+        7917 7918 7919 7920 8000 8008 8028 8080 8088 8118 8123 8180 8243 8280 8888 9090 9091 9443 9999 11371
+preprocessor stream5_udp: timeout 180
+preprocessor normalize_ip4
+preprocessor normalize_tcp: ips ecn stream
+preprocessor normalize_icmp4
+preprocessor normalize_ip6
+preprocessor normalize_icmp6
+preprocessor sfportscan: proto  { all } memcap { 10000000 } sense_level { medium }
+preprocessor smtp: ports { 25 465 587 691 } \
+    inspection_type stateful \
+    b64_decode_depth 0 \
+    qp_decode_depth 0 \
+    bitenc_decode_depth 0 \
+    uu_decode_depth 0 \
+    log_mailfrom \
+    log_rcptto \
+    log_filename \
+    log_email_hdrs \
+    normalize cmds \
+    normalize_cmds { ATRN AUTH BDAT CHUNKING DATA DEBUG EHLO EMAL ESAM ESND ESOM ETRN EVFY } \
+    normalize_cmds { EXPN HELO HELP IDENT MAIL NOOP ONEX QUEU QUIT RCPT RSET SAML SEND SOML } \
+    normalize_cmds { STARTTLS TICK TIME TURN TURNME VERB VRFY X-ADAT X-DRCP X-ERCP X-EXCH50 } \
+    normalize_cmds { X-EXPS X-LINK2STATE XADR XAUTH XCIR XEXCH50 XGEN XLICENSE XQUE XSTA XTRN XUSR } \
+    max_command_line_len 512 \
+    max_header_line_len 1000 \
+    max_response_line_len 512 \
+    alt_max_command_line_len 260 { MAIL } \
+    alt_max_command_line_len 300 { RCPT } \
+    alt_max_command_line_len 500 { HELP HELO ETRN EHLO } \
+    alt_max_command_line_len 255 { EXPN VRFY ATRN SIZE BDAT DEBUG EMAL ESAM ESND ESOM EVFY IDENT NOOP RSET } \
+    alt_max_command_line_len 246 { SEND SAML SOML AUTH TURN ETRN DATA RSET QUIT ONEX QUEU STARTTLS TICK TIME TURNME VERB X-EXPS X-LINK2STATE XADR XAUTH XCIR XEXCH50 XGEN XLICENSE XQUE XSTA XTRN XUSR } \
+    valid_cmds { ATRN AUTH BDAT CHUNKING DATA DEBUG EHLO EMAL ESAM ESND ESOM ETRN EVFY } \ 
+    valid_cmds { EXPN HELO HELP IDENT MAIL NOOP ONEX QUEU QUIT RCPT RSET SAML SEND SOML } \
+    valid_cmds { STARTTLS TICK TIME TURN TURNME VERB VRFY X-ADAT X-DRCP X-ERCP X-EXCH50 } \
+    valid_cmds { X-EXPS X-LINK2STATE XADR XAUTH XCIR XEXCH50 XGEN XLICENSE XQUE XSTA XTRN XUSR } \
+    xlink2state { enabled }
+preprocessor ssh: server_ports { 22 } \
+                  autodetect \
+                  max_client_bytes 19600 \
+                  max_encrypted_packets 20 \
+                  max_server_version_len 100 \
+                  enable_respoverflow enable_ssh1crc32 \
+                  enable_srvoverflow enable_protomismatch
+preprocessor dns: ports { 53 } enable_rdata_overflow
+preprocessor imap: \
+   ports { 143 } \
+   b64_decode_depth 0 \
+   qp_decode_depth 0 \
+   bitenc_decode_depth 0 \
+   uu_decode_depth 0
+preprocessor pop: \
+   ports { 110 } \
+   b64_decode_depth 0 \
+   qp_decode_depth 0 \
+   bitenc_decode_depth 0 \
+   uu_decode_depth 0
+preprocessor reputation: \
+   memcap <%= (node[:memory][:total].to_i/1024 > 15000) ? "4000" : "1000" %>, \
+   shared_mem /etc/snort/<%= @group["instances_group"] %>/iplists, \
+   priority whitelist, \
+   white trust, \
+   nested_ip both, \
+   geoip_db /share/GeoIP/country.dat, \
+   geoip_path /etc/snort/<%= @group["instances_group"] %>/geoips, \
+   ordered, <%= (node["redborder"]["snort"]["default_action"].nil? or node["redborder"]["snort"]["default_action"]=="monitor") ? "" : "default_action whitelist, " %> \
+   scan_local
+

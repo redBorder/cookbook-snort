@@ -1,0 +1,32 @@
+<%####################################################################### %>
+<%# Copyright (c) 2014 ENEO Tecnología S.L. %>
+<%# This file is part of redBorder. %>
+<%# redBorder is free software: you can redistribute it and/or modify %>
+<%# it under the terms of the GNU Affero General Public License License as published by %>
+<%# the Free Software Foundation, either version 3 of the License, or %>
+<%# (at your option) any later version. %>
+<%# redBorder is distributed in the hope that it will be useful, %>
+<%# but WITHOUT ANY WARRANTY; without even the implied warranty of %>
+<%# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the %>
+<%# GNU Affero General Public License License for more details. %>
+<%# You should have received a copy of the GNU Affero General Public License License %>
+<%# along with redBorder. If not, see <http://www.gnu.org/licenses/>. %>
+<%####################################################################### %>
+
+<% unless @vgroup["ipvars"].nil? %>
+<% if !@vgroup["ipvars"]["HOME_NET"].nil? %>
+ipvar HOME_NET <%= @vgroup["ipvars"]["HOME_NET"] %>
+<% end %>
+<% @vgroup["ipvars"].each do |var| %>
+<% if var[0]!="HOME_NET" %>
+ipvar <%= var[0] %> <%= var[1].gsub(" ", "").split(",").map{|x| (x=="HOME_NET" ? "$HOME_NET" : (x=="!HOME_NET" ? "!$HOME_NET" : x) ) }.join(",") %>
+<%- end %>
+<%- end %>
+<%- end %>
+
+<% unless @vgroup["portvars"].nil? %>
+<% @vgroup["portvars"].each do |var| %>
+portvar <%= var[0] %> <%= var[1].gsub(" ", "") %>
+<%- end %>
+<%- end %>
+
