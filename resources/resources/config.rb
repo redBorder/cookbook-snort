@@ -13,7 +13,6 @@ attribute :cache_dir, :kind_of => String, :default => "/var/cache/snort"
 attribute :templates_dir, :kind_of => String, :default => "/var/cache/snort/templates"
 attribute :config_dir, :kind_of => String, :default => "/etc/snort"
 attribute :user, :kind_of => String, :default => "snort"
-attribute :sensors, :kind_of => Hash, :default => []
 
 
 attribute :sensor_id, :kind_of => Integer, :default => 0

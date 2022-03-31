@@ -8,6 +8,5 @@
 #
 
 snort_config "config" do
-	sensors node["redborder"]["sensors_info"]["flow-sensor"]
   action :add
 end
