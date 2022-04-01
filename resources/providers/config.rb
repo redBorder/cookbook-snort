@@ -13,7 +13,10 @@ action :add do #Usually used to install and configure something
     templates_dir = new_resource.templates_dir
     user = new_resource.user
     sensors = new_resource.sensors
-    
+    yum_package "snort" do
+      action :upgrade
+      flush_cache [:before]
+    end 
     
     groups = node["redborder"]["snort"]["groups"].keys.map{|x| x.to_i}
     used_segments = []
