@@ -12,7 +12,9 @@ action :add do #Usually used to install and configure something
     config_dir = new_resource.config_dir
     templates_dir = new_resource.templates_dir
     user = new_resource.user
-    sensors = new_resource.sensors
+    #sensors = new_resource.sensors
+    sensor_id = new_resource.sensor_id
+    
     yum_package "snort" do
       action :upgrade
       flush_cache [:before]
