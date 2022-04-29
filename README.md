@@ -23,4 +23,4 @@ cookbook to install and configure snort service in redborder environments
 GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007
 
 ## Authors
-Authors: Alberto Rodríguez <arodriguez@redborder.com>, Javier Rodríguez <javiercrg@redborder.com>
+Authors: Miguel Negrón <manegron@redborder.com>, David Vanhoucke <dvanhoucke@redborder.com>
