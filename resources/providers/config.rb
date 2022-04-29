@@ -23,7 +23,8 @@ action :add do #Usually used to install and configure something
     groups.each do |group|
 
       bindings = group["bindings"].keys.map{|x| x.to_i}.flatten
-    
+      name = group["name"]
+      
       [ "snortd" ].each do |s|
         [ "reload", "restart", "stop", "start" ].each do |s_action|
           execute "#{s_action}_#{s}_#{group["instances_group"]}_#{name}" do
