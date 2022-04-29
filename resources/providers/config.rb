@@ -352,7 +352,7 @@ action :add do #Usually used to install and configure something
     end
 
     service "snortd" do
-      #service_name node[:redBorder][:snort][:service]
+      service_name node[:redborder][:snort][:service]
       ignore_failure true
       supports :status => true, :reload => true, :restart => true
       action([:start, :enable])
