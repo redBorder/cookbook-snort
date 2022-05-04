@@ -366,7 +366,7 @@ end
 
 action :remove do #Usually used to uninstall something
   begin
-    service "snort" do
+    service "snortd" do
       supports :stop => true, :disable => true
       action [:stop, :disable]
     end
