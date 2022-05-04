@@ -352,11 +352,14 @@ action :add do #Usually used to install and configure something
     end
 
     service "snortd" do
-      service_name node[:redborder][:snort][:service]
+      provider Chef::Provider::Service::Init
+      service_name node[:redborder][:snortd][:service]
       ignore_failure true
-      supports :status => true, :reload => true, :restart => true
-      action([:start, :enable])
+      supports :status => true, :reload => true, :restart => true, :enable => true
+      #action([:start, :enable])
+      action([:start])
     end
+
 
     Chef::Log.info("snort cookbook has been processed")
   rescue => e
@@ -367,8 +370,11 @@ end
 action :remove do #Usually used to uninstall something
   begin
     service "snortd" do
+      provider Chef::Provider::Service::Init
+      service_name node[:redborder][:snortd][:service]
       supports :stop => true, :disable => true
-      action [:stop, :disable]
+      #action [:stop, :disable]
+      action [:stop]
     end
 
     Chef::Log.info("snort cookbook has been processed")
