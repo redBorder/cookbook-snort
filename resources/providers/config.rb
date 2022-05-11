@@ -352,7 +352,7 @@ action :add do #Usually used to install and configure something
     end
 
     service "snortd" do
-      provider Chef::Provider::Service::Init
+      #provider Chef::Provider::Service::Init
       service_name node[:redborder][:snortd][:service]
       ignore_failure true
       supports :status => true, :reload => true, :restart => true
@@ -370,7 +370,7 @@ end
 action :remove do #Usually used to uninstall something
   begin
     service "snortd" do
-      provider Chef::Provider::Service::Init
+      #provider Chef::Provider::Service::Init
       service_name node[:redborder][:snortd][:service]
       supports :stop => true
       #action [:stop, :disable]
