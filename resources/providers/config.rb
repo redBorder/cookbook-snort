@@ -8,7 +8,7 @@ action :add do #Usually used to install and configure something
     sensor_id = new_resource.sensor_id
     groups = new_resource.groups
     
-    yum_package "snort" do
+    dnf_package "snort" do
       action :upgrade
       flush_cache [:before]
     end 
