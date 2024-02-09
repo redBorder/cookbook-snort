@@ -93,7 +93,7 @@ preprocessor reputation: \
    priority whitelist, \
    white trust, \
    nested_ip both, \
-   geoip_db /share/GeoIP/country.dat, \
+   geoip_db /usr/share/GeoIP/country.dat, \
    geoip_path /etc/snort/<%= @group["instances_group"] %>/geoips, \
    ordered, <%= (node["redborder"]["snort"]["default_action"].nil? or node["redborder"]["snort"]["default_action"]=="monitor") ? "" : "default_action whitelist, " %> \
    scan_local
