@@ -3,6 +3,11 @@ cookbook-example CHANGELOG
 
 This file is used to list changes made in each version of the example cookbook.
 
+0.1.1
+-----
+- [Vicente Mesa <vimesa@redborder.com]
+  - Changed country.dat file path 
+
 0.0.1
 -----
 - [Alberto Rodríguez <arodriguez@redborder.com]
