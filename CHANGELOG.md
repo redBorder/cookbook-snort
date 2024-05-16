@@ -1,5 +1,10 @@
-cookbook-example CHANGELOG
-==========================
+cookbook-snort CHANGELOG
+===============
+
+## 1.0.1
+
+  - Miguel Negron
+    - [ad17491] Call ruby system File.stat instead of Chef one
 
 This file is used to list changes made in each version of the example cookbook.
 
