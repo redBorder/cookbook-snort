@@ -302,7 +302,7 @@ action :add do #Usually used to install and configure something
         Dir.glob(x[:files]).each do |f|
           match = f.match(x[:regex])
           if match and !bindings.include?(match[1].to_i)
-            if File.directory?(f)
+            if ::File.directory?(f)
               directory f do 
                 recursive true
                 action :delete
@@ -322,10 +322,10 @@ action :add do #Usually used to install and configure something
       ].each do |x|
         Dir.glob(x[:files]).each do |f|
           match = f.match(x[:regex])
-          if ( match and match[1].to_i < group["cpu_list"].size and ( (Time.now - Class::File.stat(f).mtime) > 3600 * 24 * 7 ) )
+          if ( match and match[1].to_i < group["cpu_list"].size and ( (Time.now - ::File.stat(f).mtime) > 3600 * 24 * 7 ) )
             # This directory can be deleted
-            if File.exists?("#{f}/archive")
-              if File.directory?("#{f}/archive")
+            if ::File.exists?("#{f}/archive")
+              if ::File.directory?("#{f}/archive")
                 directory "#{f}/archive" do 
                   recursive true
                   action :delete
