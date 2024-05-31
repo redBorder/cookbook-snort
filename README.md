@@ -1,6 +1,17 @@
 # Snort Cookbook
+[![Build Status][build-shield]][build-url]
+[![Linters][linters-shield]][linters-url]
+[![License][license-shield]][license-url]
 
-cookbook to install and configure snort service in redborder environments
+<!-- Badges -->
+[build-shield]: https://github.com/redBorder/cookbook-snort/actions/workflows/rpm.yml/badge.svg?branch=master
+[build-url]: https://github.com/redBorder/cookbook-snort/actions/workflows/rpm.yml?query=branch%3Amaster
+[linters-shield]: https://github.com/redBorder/cookbook-snort/actions/workflows/lint.yml/badge.svg?event=push
+[linters-url]: https://github.com/redBorder/cookbook-snort/actions/workflows/lint.yml
+[license-shield]: https://img.shields.io/badge/license-AGPLv3-blue.svg
+[license-url]: https://github.com/cookbook-snort/blob/HEAD/LICENSE
+
+Chef cookbook to install and configure snort service in redborder environments
 
 ### Platforms
 
@@ -8,7 +19,7 @@ cookbook to install and configure snort service in redborder environments
 
 ### Chef
 
-- Chef 12.0 or later
+- Chef 15.7.0 or later
 
 ## Contributing
 
@@ -20,7 +31,5 @@ cookbook to install and configure snort service in redborder environments
 6. Submit a Pull Request using Github
 
 ## License
-GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007
 
-## Authors
-Authors: Miguel Negrón <manegron@redborder.com>, David Vanhoucke <dvanhoucke@redborder.com>
+GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007
