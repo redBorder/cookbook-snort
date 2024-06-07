@@ -1,12 +1,8 @@
-#
-# Cookbook Name:: snort
+# Cookbook:: snort
 # Recipe:: default
-#
-# Copyright 2017, redborder
-#
-# AFFERO GENERAL PUBLIC LICENSE, Version 3
-#
+# Copyright:: 2024, redborder
+# License:: Affero General Public License, Version 3
 
-snort_config "config" do
+snort_config 'config' do
   action :add
 end

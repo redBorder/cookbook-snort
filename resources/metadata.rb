@@ -1,7 +1,6 @@
 name             'snort'
-maintainer       'Miguel Negron'
-maintainer_email 'manegron@redborder'
-license          'AGPL v3'
+maintainer       'Eneo Tecnología S.L.'
+maintainer_email 'git@redborder.com'
+license          'AGPL-3.0'
 description      'Installs/Configures cookbook-snort'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.0.1'
+version          '1.0.2'
