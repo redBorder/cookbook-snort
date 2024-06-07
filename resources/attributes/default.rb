@@ -1,3 +1,3 @@
-#Flags
-default["snort"]["registered"] = false
-default[:redborder][:snortd][:service]         = "snortd"
+# Flags
+default['snort']['registered'] = false
+default[:redborder][:snortd][:service] = 'snortd'
