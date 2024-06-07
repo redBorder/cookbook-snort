@@ -1,6 +1,17 @@
 cookbook-snort CHANGELOG
 ===============
 
+## 1.0.2
+
+  - Miguel Negron
+    - [8bff4de] lint resources
+    - [db60360] lint recipes
+    - [b0a5aba] lint providers
+    - [2787fab] lint attributes
+    - [c985027] Update README.md
+    - [6a01283] Update rpm.yml
+    - [666274c] Update metadata.rb
+
 ## 1.0.1
 
   - Miguel Negron
