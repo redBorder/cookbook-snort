@@ -1,9 +1,14 @@
 cookbook-snort CHANGELOG
 ===============
 
+## 1.0.3
+
+  - Miguel Negrón
+    - [0b94ebd] Add pre and postun to clean the cookbook
+
 ## 1.0.2
 
-  - Miguel Negron
+  - Miguel Negrón
     - [8bff4de] lint resources
     - [db60360] lint recipes
     - [b0a5aba] lint providers
@@ -14,7 +19,7 @@ cookbook-snort CHANGELOG
 
 ## 1.0.1
 
-  - Miguel Negron
+  - Miguel Negrón
     - [ad17491] Call ruby system File.stat instead of Chef one
 
 This file is used to list changes made in each version of the example cookbook.
