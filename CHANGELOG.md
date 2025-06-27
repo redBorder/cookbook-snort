@@ -1,6 +1,11 @@
 cookbook-snort CHANGELOG
 ===============
 
+## 1.0.4
+
+  - nilsver
+    - [bedc82c] remove flush cache
+
 ## 1.0.3
 
   - Miguel Negrón
