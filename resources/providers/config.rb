@@ -8,7 +8,6 @@ action :add do
 
     dnf_package 'snort' do
       action :upgrade
-      flush_cache [:before]
     end
 
     groups.each do |group|
