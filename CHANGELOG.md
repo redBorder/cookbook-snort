@@ -1,6 +1,11 @@
 cookbook-snort CHANGELOG
 ===============
 
+## 1.0.5
+
+  - jnavarrorb
+    - [7e5a125] Remove executable permissions on non-executable files
+
 ## 1.0.4
 
   - nilsver
