@@ -5,6 +5,7 @@ action :add do
   begin
     sensor_id = new_resource.sensor_id
     groups = new_resource.groups
+    s3_malware_secrets = new_resource.s3_malware_secrets
 
     dnf_package 'snort' do
       action :upgrade
@@ -47,10 +48,24 @@ action :add do
         action :create
       end
 
+      directory "/etc/snort/#{group['instances_group']}/files" do
+          owner "root"
+          group "root"
+          mode 0755
+          action :create
+      end
+
       directory "/etc/snort/#{group['instances_group']}/iplists" do
         owner 'root'
         group 'root'
         mode '0755'
+        action :create
+      end
+
+      directory "/etc/snort/#{group['instances_group']}/url" do
+        owner 'root'
+        group 'root'
+        mode 0755
         action :create
       end
 
@@ -64,6 +79,17 @@ action :add do
           action :create_if_missing
           retries 2
         end
+      end
+
+      template "/etc/snort/#{group['instances_group']}/file_magic.conf" do
+        source 'file_magic.conf.erb'
+        cookbook 'snort'
+        owner 'root'
+        group 'root'
+        mode '0644'
+        variables(file_filter_policy: node['redborder']['snort']['groups'][group['instances_group'].to_s]['file_filter_policy'])
+        action :create
+        retries 2
       end
 
       template "/etc/snort/#{group['instances_group']}/gen-msg.map" do
@@ -133,6 +159,8 @@ action :add do
         notifies :run, "execute[reload_snortd_#{group['instances_group']}_#{name}]", :delayed
       end
 
+      file_capture_max = 100 * 1024 * 1024
+
       template "/etc/sysconfig/snort-#{group['instances_group']}" do
         source 'snort.erb'
         cookbook 'snort'
@@ -140,7 +168,7 @@ action :add do
         group 'root'
         mode '0644'
         retries 2
-        variables(sensor_id: sensor_id, name: name, group: group)
+        variables(sensor_id: sensor_id, name: name, group: group, file_capture_max: file_capture_max)
         notifies :run, "execute[restart_snortd_#{group['instances_group']}_#{name}]", :delayed
       end
 
@@ -151,11 +179,11 @@ action :add do
         group 'root'
         mode '0644'
         retries 2
-        variables(sensor_id: sensor_id, name: name, group: group)
+        variables(sensor_id: sensor_id, name: name, group: group, key_id: s3_malware_secrets['s3_malware_access_key_id'], key_secret: s3_malware_secrets['s3_malware_secret_key_id'], file_capture_max: file_capture_max, file_filter_policy: node['redborder']['snort']['groups'][group['instances_group'].to_s]['file_filter_policy'])
         notifies :run, "execute[reload_snortd_#{group['instances_group']}_#{name}]", :delayed
       end
 
-      %W( iplists/zone.info geoips/geo.info).each do |rfile|
+      %W( iplists/zone.info geoips/geo.info files/seen.list files/black.list url/urls.rules iplists/redBorder-file-malware-agent.blf iplists/redBorder-file-malware-agent.wlf ).each do |rfile|
         template "/etc/snort/#{group['instances_group']}/#{rfile}" do
           source 'empty.erb'
           cookbook 'snort'
@@ -267,7 +295,7 @@ action :add do
           notifies :run, "execute[reload_snortd_#{group['instances_group']}_#{name}]", :delayed
         end
 
-        %w(snort.rules preprocessor.rules so.rules file_capture.rules).each do |rfile|
+        %w(snort.rules preprocessor.rules so.rules).each do |rfile|
           template "/etc/snort/#{group['instances_group']}/snort-binding-#{id}/#{rfile}" do
             source 'empty.erb'
             cookbook 'snort'
@@ -278,6 +306,18 @@ action :add do
             retries 2
             notifies :run, "execute[reload_snortd_#{group['instances_group']}_#{name}]", :delayed
           end
+        end
+
+        template "/etc/snort/#{group["instances_group"]}/snort-binding-#{id}/file_capture.rules" do
+          source 'file_capture.rules.erb'
+          cookbook 'snort'
+          owner 'root'
+          group 'root'
+          mode '0644'
+          action :create
+          retries 2
+          variables(:file_filter_policy => node['redborder']['snort']['groups'][group['instances_group'].to_s]['file_filter_policy'])
+          notifies :run, "execute[reload_snortd_#{group['instances_group']}_#{name}]", :delayed
         end
 
         template "/etc/snort/#{group['instances_group']}/snort-binding-#{id}/reputation.rules" do

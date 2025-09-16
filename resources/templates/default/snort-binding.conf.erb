@@ -56,6 +56,13 @@ include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/preprocessor.rules
 <%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/preprocessor.rules_local" if File.exists?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/preprocessor.rules_local" %>
 
 ##########################################################
+### Customize your file capture preprocessor rules
+###########################################################
+
+include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/file_capture.rules
+<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/file_capture.rules_local" if File.exists?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/file_capture.rules_local" %>
+
+##########################################################
 ##### Customize your reputation preprocessor rules
 #############################################################
 

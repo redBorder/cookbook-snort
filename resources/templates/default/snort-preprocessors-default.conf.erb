@@ -98,3 +98,24 @@ preprocessor reputation: \
    ordered, <%= (node["redborder"]["snort"]["default_action"].nil? or node["redborder"]["snort"]["default_action"]=="monitor") ? "" : "default_action whitelist, " %> \
    scan_local
 
+include file_magic.conf
+
+config file:\
+   file_type_depth <%= @file_capture_max %>, \
+   file_signature_depth <%= @file_capture_max %>, \
+   file_capture_max <%= @file_capture_max %>, \
+   file_capture_memcap 1024
+
+preprocessor file_inspect: \
+           type_id, \
+           capture_queue_size 5000, \
+           signature, \
+           track_extradata, \
+           s3_bucket malware, \
+           s3_cluster s3.service.redborder.cluster, \
+           seenlist files/seen.list, \
+           blacklist files/black.list, \
+           sha_cache_max_size_m 1024, \
+           sha_cache_min_rows 65536, \
+           s3_access_key <%= @key_id %>, \
+           s3_secret_key <%= @key_secret %>
