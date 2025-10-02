@@ -180,8 +180,7 @@ action :add do
         group 'root'
         mode '0644'
         retries 2
-        variables(sensor_id: sensor_id, name: name, group: group, key_id: s3_malware_
-        secrets['s3_malware_access_key_id'], key_secret: s3_malware_secrets['s3_malware_secret_key_id'], file_capture_max: file_capture_max, file_filter_policy: node['redborder']['snort']['groups'][group['instances_group'].to_s]['file_filter_policy'], cdomain: cdomain)
+        variables(sensor_id: sensor_id, name: name, group: group, key_id: s3_malware_secrets['s3_malware_access_key_id'], key_secret: s3_malware_secrets['s3_malware_secret_key_id'], file_capture_max: file_capture_max, file_filter_policy: node['redborder']['snort']['groups'][group['instances_group'].to_s]['file_filter_policy'], cdomain: cdomain)
         notifies :run, "execute[reload_snortd_#{group['instances_group']}_#{name}]", :delayed
       end
 
