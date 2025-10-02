@@ -50,10 +50,10 @@ action :add do
       end
 
       directory "/etc/snort/#{group['instances_group']}/files" do
-          owner "root"
-          group "root"
-          mode 0755
-          action :create
+        owner 'root'
+        group 'root'
+        mode 0755
+        action :create
       end
 
       directory "/etc/snort/#{group['instances_group']}/iplists" do
@@ -309,7 +309,7 @@ action :add do
           end
         end
 
-        template "/etc/snort/#{group["instances_group"]}/snort-binding-#{id}/file_capture.rules" do
+        template "/etc/snort/#{group['instances_group']}/snort-binding-#{id}/file_capture.rules" do
           source 'file_capture.rules.erb'
           cookbook 'snort'
           owner 'root'
