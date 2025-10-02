@@ -112,7 +112,7 @@ preprocessor file_inspect: \
            signature, \
            track_extradata, \
            s3_bucket malware, \
-           s3_cluster s3.service.redborder.cluster, \
+           s3_cluster s3.service.<%= @cdomain %>, \
            seenlist files/seen.list, \
            blacklist files/black.list, \
            sha_cache_max_size_m 1024, \

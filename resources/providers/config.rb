@@ -6,6 +6,7 @@ action :add do
     sensor_id = new_resource.sensor_id
     groups = new_resource.groups
     s3_malware_secrets = new_resource.s3_malware_secrets
+    cdomain = new_resource.cdomain
 
     dnf_package 'snort' do
       action :upgrade
@@ -280,7 +281,7 @@ action :add do
           group 'root'
           mode '0644'
           retries 2
-          variables(sensor_id: sensor_id, name: vgroup_name, vgroup: vgroup, group: group)
+          variables(sensor_id: sensor_id, name: vgroup_name, vgroup: vgroup, group: group, cdomain: cdomain)
           notifies :run, "execute[reload_snortd_#{group['instances_group']}_#{name}]", :delayed
         end
 
