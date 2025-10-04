@@ -317,7 +317,7 @@ action :add do
           mode '0644'
           action :create
           retries 2
-          variables(:file_filter_policy => node['redborder']['snort']['groups'][group['instances_group'].to_s]['file_filter_policy'])
+          variables(file_filter_policy: node['redborder']['snort']['groups'][group['instances_group'].to_s]['file_filter_policy'])
           notifies :run, "execute[reload_snortd_#{group['instances_group']}_#{name}]", :delayed
         end
 
