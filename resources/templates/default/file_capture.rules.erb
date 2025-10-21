@@ -1,0 +1,7 @@
+<% if @file_filter_policy and @file_filter_policy["filetype"] %>
+  <% @file_filter_policy["filetype"].each do |rule| %>
+    <% if rule['action'] == 'filter' or rule['action'] == 'drop'%>
+<%= "alert (msg:\"#{rule['msg']}\";  sid:#{rule['id']}; gid:146; rev:#{rule['rev']}; metadata:rule-type preproc; )".strip %>
+    <% end %>
+  <% end %>
+<% end %>

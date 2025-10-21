@@ -1,6 +1,23 @@
 cookbook-snort CHANGELOG
 ===============
 
+## 1.1.0
+
+  - Miguel Negrón
+    - [60f1b87] Merge pull request #16 from redBorder/feature/#17729_add_file_s3_and_file_extra_data_changes
+  - Miguel
+    - [60f1b87] Merge pull request #16 from redBorder/feature/#17729_add_file_s3_and_file_extra_data_changes
+    - [e4bf875] Fix lint
+  - manegron
+    - [60f1b87] Merge pull request #16 from redBorder/feature/#17729_add_file_s3_and_file_extra_data_changes
+    - [e4bf875] Fix lint
+    - [95b73fe] Fix config.rb
+    - [6e2dd95] Fix cdomain file
+    - [ed02da9] Fix cdomain
+    - [1f6ecd7] Fix lint
+    - [4d2c303] Add domain
+    - [ddef1a2] Add malware settingsto snort
+
 ## 1.0.5
 
   - jnavarrorb
