@@ -6,3 +6,5 @@ default_action :add
 
 attribute :sensor_id, kind_of: Integer, default: 0
 attribute :groups, kind_of: Array, default: []
+attribute :s3_malware_secrets, kind_of: Hash, default: {}
+attribute :cdomain, kind_of: String, default: 'redborder.cluster'
