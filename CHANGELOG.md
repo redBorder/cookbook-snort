@@ -1,6 +1,11 @@
 cookbook-snort CHANGELOG
 ===============
 
+## 1.1.1
+
+  - manegron
+    - [e184c4c] Upload cookbook only if opscode-erchef is active
+
 ## 1.1.0
 
   - Miguel Negrón
