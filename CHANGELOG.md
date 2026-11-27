@@ -1,6 +1,11 @@
 cookbook-snort CHANGELOG
 ===============
 
+## 2.0.0
+
+  - manegron
+    - [4e497fa] Fix File.exists? by File.exist?
+
 ## 1.1.1
 
   - manegron
