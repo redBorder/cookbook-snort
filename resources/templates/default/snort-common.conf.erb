@@ -148,7 +148,7 @@ output unified2: filename snort.log, limit 64, dont_rotate_on_packets, vlan_even
 # Default Preprocessor configuration 
 ###################################################
 
-<% if File.exists?"/etc/snort/#{@group["instances_group"]}/snort-preprocessors-default.conf_local" %>
+<% if File.exist?"/etc/snort/#{@group["instances_group"]}/snort-preprocessors-default.conf_local" %>
 include $BASE_PATH/snort-preprocessors-default.conf_local
 <% else %> 
 include $BASE_PATH/snort-preprocessors-default.conf

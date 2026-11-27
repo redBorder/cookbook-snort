@@ -28,13 +28,13 @@ include $BASE_PATH/snort-common.conf
 dynamicdetection directory $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/dynamicrules
 
 include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/snort-variables.conf
-<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/snort-variables.conf_local" if File.exists?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/snort-variables.conf_local" %>
+<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/snort-variables.conf_local" if File.exist?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/snort-variables.conf_local" %>
 
 ###################################################
 # Configure preprocessors
 ###################################################
 
-<% if File.exists?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/snort-preprocessors.conf_local" %>
+<% if File.exist?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/snort-preprocessors.conf_local" %>
 include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/snort-preprocessors.conf_local
 <% else %>
 include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/snort-preprocessors.conf
@@ -47,34 +47,34 @@ include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/snort-preprocessors.conf
 <%- if @group["mode"] != "IPS_NR" %>
 include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/snort.rules
 <% end %>
-<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/snort.rules_local" if File.exists?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/snort.rules_local" %>
+<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/snort.rules_local" if File.exist?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/snort.rules_local" %>
 ##########################################################
 # Customize your preprocessor and decoder alerts
 #########################################################
 
 include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/preprocessor.rules
-<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/preprocessor.rules_local" if File.exists?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/preprocessor.rules_local" %>
+<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/preprocessor.rules_local" if File.exist?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/preprocessor.rules_local" %>
 
 ##########################################################
 ### Customize your file capture preprocessor rules
 ###########################################################
 
 include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/file_capture.rules
-<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/file_capture.rules_local" if File.exists?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/file_capture.rules_local" %>
+<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/file_capture.rules_local" if File.exist?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/file_capture.rules_local" %>
 
 ##########################################################
 ##### Customize your reputation preprocessor rules
 #############################################################
 
 include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/reputation.rules
-<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/reputation.rules_local" if File.exists?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/reputation.rules_local" %>
+<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/reputation.rules_local" if File.exist?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/reputation.rules_local" %>
 
 ###################################################
 # Thresholds 
 ###################################################
 
 include $BASE_PATH/snort-binding-<%= @vgroup["id"] %>/threshold.conf
-<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/threshold.conf_local" if File.exists?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/threshold.conf_local" %>
+<%= "include $BASE_PATH/snort-binding-#{@vgroup["id"]}/threshold.conf_local" if File.exist?"/etc/snort/#{@group["instances_group"]}/snort-binding-#{@vgroup["id"]}/threshold.conf_local" %>
 
 ###########################
 ### Default event filtering #
